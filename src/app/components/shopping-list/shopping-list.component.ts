@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons';
 
 
 import { ProductService } from '../../service/product-service.service';
@@ -8,6 +11,7 @@ import { Product } from '../../../classes/product';
 import * as ProductActions from '../../../store/actions/product.actions';
 import * as fromProductStore from '../../../store/reducer/product.reducer';
 import { ProductStore } from 'src/models/product-store';
+import { FilterComponent } from '../filter/filter.component';
 
 @Component({
   selector: 'shopping-list',
@@ -16,12 +20,15 @@ import { ProductStore } from 'src/models/product-store';
   encapsulation: ViewEncapsulation.None
 })
 export class ShoppingListComponent implements OnInit {
-
+  iconFilter = faFilter;
+  iconSort = faSort;
   product: Observable<ProductStore>;
+  modalConfig: {title: string, type: string} = null;
 
 
   constructor (
     private productService: ProductService,
+    private modalService: NgbModal,
     private store: Store<fromProductStore.ProductState>
   ) {}
 
@@ -36,6 +43,23 @@ export class ShoppingListComponent implements OnInit {
         this.store.dispatch(new ProductActions.UpdateMaximumProductPrice(maxProductPrice));
         this.store.dispatch(new ProductActions.UpdateFetchedProducts(data));
       });
+  }
+
+  openFilterModal (content) {
+    this.modalConfig = {
+      title: 'Filter by Price',
+      type: 'FILTER'
+    };
+    this.modalService.open(content, { size: 'sm' });
+    console.log('filtermodal')
+  }
+  
+  openSortModal (content) {
+    this.modalConfig = {
+      title: 'Sort By',
+      type: 'SORT'
+    };
+    this.modalService.open(content, { size: 'sm' });
   }
 
 }

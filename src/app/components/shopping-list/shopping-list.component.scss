@@ -1,0 +1,18 @@
+@media screen and (max-width: 768px) {
+  .d-sm-none {
+    display: none;
+  }
+
+  .action.d-md-none {
+    display: flex;
+    align-content: stretch;
+    align-items: stretch;
+    margin-bottom: 10px;
+    padding-left: 15px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .d-md-none {
+    display: none;
+  }
+}

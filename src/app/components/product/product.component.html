@@ -20,22 +20,24 @@
       {{percentageDiscount}}% off
     </p>
   </div>
-  <button class="btn btn-success btn-sm" (click)="addToCart(product)" *ngIf="!productInCart">Add to cart</button>
-  <div class="cart-operations" *ngIf="productInCart">
-    <div class="input-group input-group-sm mb-3">
-      <div class="input-group-prepend" id="button-addon3">
-        <button
-          (click)="removeFromCart(product.id)"
+  <div class="action text-center">
+    <button class="btn btn-success btn-sm" (click)="addToCart(product)" *ngIf="!productInCart">Add to cart</button>
+    <div class="cart-operations" *ngIf="productInCart">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend" id="button-addon3">
+          <button
+            (click)="removeFromCart(product.id)"
+            class="btn btn-success btn-sm"
+            type="button">-</button>
+        </div>
+        <label class="form-control text-center">{{product.itemsInCart}}</label>
+        <div class="input-group-append" id="button-addon3">
+          <button
           class="btn btn-success btn-sm"
-          type="button">-</button>
-      </div>
-      <label class="form-control text-center">{{product.itemsInCart}}</label>
-      <div class="input-group-append" id="button-addon3">
-        <button
-        class="btn btn-success btn-sm"
-        (click)="addToCart(product)"
-        [disabled]="product.stock === 0"
-        type="button">+</button>
+          (click)="addToCart(product)"
+          [disabled]="product.stock === 0"
+          type="button">+</button>
+        </div>
       </div>
     </div>
   </div>

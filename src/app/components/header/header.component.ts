@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faJedi } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
 import * as fromProductStore from '../../../store/reducer/product.reducer';
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   faCart = faShoppingCart;
+  iconJedi = faJedi;
   cartItemSubscription: Subscription;
   itemCount: number;
 

@@ -4,6 +4,15 @@
     color: #fff;
   }
 
+  .navbar-brand {
+    font-size: 30px;
+    color: white;
+  }
+
+  .header-container {
+    flex-wrap: nowrap;
+  }
+
   .right-content {
     display: flex;
     align-items: center;

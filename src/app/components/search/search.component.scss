@@ -1,3 +1,22 @@
 .search-form {
   padding: 0 15px;
+  flex-wrap: nowrap;
+
+  .form-control {
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+
+    &::placeholder {
+      color: #bbb;
+    }
+  }
+
+  .btn-link {
+    color: #fff;
+  }
 }
