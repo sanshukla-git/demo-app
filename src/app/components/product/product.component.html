@@ -1,0 +1,42 @@
+<div class="product">
+  <div class="img">
+    <img alt="Product" class="product-image" [src]="product.image"/>
+  </div>
+  <p class="name">{{product.name}}</p>
+  <div class="price">
+    <p
+      class="special"
+      *ngIf="product.price.specialPrice > 0">
+      {{product.price.specialPrice | currency}}
+    </p>
+    <p
+      class="original"
+      [ngClass]="{discounted: (product.price.specialPrice > 0)}">
+      {{product.price.price | currency}}
+    </p>
+    <p
+      *ngIf="product.price.specialPrice > 0"
+      class="discount text-success">
+      {{percentageDiscount}}% off
+    </p>
+  </div>
+  <button class="btn btn-success btn-sm" (click)="addToCart(product)" *ngIf="!productInCart">Add to cart</button>
+  <div class="cart-operations" *ngIf="productInCart">
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend" id="button-addon3">
+        <button
+          (click)="removeFromCart(product.id)"
+          class="btn btn-success btn-sm"
+          type="button">-</button>
+      </div>
+      <label class="form-control text-center">{{product.itemsInCart}}</label>
+      <div class="input-group-append" id="button-addon3">
+        <button
+        class="btn btn-success btn-sm"
+        (click)="addToCart(product)"
+        [disabled]="product.stock === 0"
+        type="button">+</button>
+      </div>
+    </div>
+  </div>
+</div>

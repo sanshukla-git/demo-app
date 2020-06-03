@@ -1,0 +1,13 @@
+<nav class="navbar navbar-light bg-blue">
+  <div class="container">
+    <a class="navbar-brand">Navbar</a>
+
+    <div class="right-content">
+      <search></search>
+      <a href="#" class="cart-icon">
+        <fa-icon [icon]="faCart"></fa-icon>
+        <span *ngIf="itemCount > 0" class="item-count badge badge-success">{{itemCount}}</span>
+      </a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,13 @@
+<div class="filter-wrapper">
+  <p class="section-title">
+    Filters
+  </p>
+  <div class="slider">
+    <form [formGroup]="sliderForm" *ngIf="dataLoaded">
+      <div class="price-range">
+        <ng5-slider [options]="options" formControlName="sliderControl"></ng5-slider>
+      </div>
+      <button type="button" class="btn btn-primary btn-sm" (click)="applyFilter()">Apply</button>
+    </form>
+  </div>
+</div>

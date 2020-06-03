@@ -1,0 +1,26 @@
+.navbar {
+  &.bg-blue {
+    background-color: #007BFF;
+    color: #fff;
+  }
+
+  .right-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cart-icon {
+    color: #fff;
+    font-size: 20px;
+    position: relative;
+
+    .item-count {
+      position: absolute;
+      top: -5px;
+      border-radius: 50%;
+      right: -15px;
+      font-size: 14px;
+    }
+  }
+}

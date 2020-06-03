@@ -1,0 +1,35 @@
+.product {
+  margin: 10px 0;
+
+  .img {
+    height: 200px;
+  }
+
+  &-image {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  .name {
+    margin: 5px 0;
+  }
+
+  .price {
+    margin-bottom: 10px;
+
+    p {
+      display: inline-block;
+      margin-bottom: 0;
+
+      &.discounted {
+        color: #888;
+        margin: 0 10px;
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  .input-group {
+    width: 60%;
+  }
+}

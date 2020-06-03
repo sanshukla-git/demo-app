@@ -1,0 +1,11 @@
+<form class="form-inline search-form" [formGroup]="searchForm">
+  <input
+    class="form-control mr-sm-2"
+    type="search"
+    formControlName="searchText"
+    placeholder="Search"
+    aria-label="Search">
+  <button class="btn btn-light my-2 my-sm-0" type="button" (click)="searchProductsByName()">
+    <fa-icon [icon]="faSearch"></fa-icon>
+  </button>
+</form>

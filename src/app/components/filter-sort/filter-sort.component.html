@@ -1,0 +1,16 @@
+<div class="sort">
+  <div class="inline-block">
+    <strong>Sort By</strong>
+  </div>
+  <ul class="nav">
+    <li class="nav-item">
+      <button class="btn btn-link filter-asc btn-sm" (click)="sortProducts('ASC')">Price -- Low High</button>
+    </li>
+    <li class="nav-item">
+      <button class="btn btn-link filter-desc btn-sm" (click)="sortProducts('DESC')">Price -- High Low</button>
+    </li>
+    <li class="nav-item">
+      <button class="btn btn-link filter-disc btn-sm" (click)="sortProducts('DISC')">Discount</button>
+    </li>
+  </ul>
+</div>
