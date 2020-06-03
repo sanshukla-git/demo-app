@@ -4,8 +4,9 @@
     type="search"
     formControlName="searchText"
     placeholder="Search"
+    (keydown)="onKeyDown($event)"
     aria-label="Search">
-  <button class="btn btn-link my-2 my-sm-0" type="button" (click)="searchProductsByName()">
+  <button class="btn btn-outline-light my-2 my-sm-0" type="button" (click)="searchProductsByName()">
     <fa-icon [icon]="faSearch"></fa-icon>
   </button>
 </form>

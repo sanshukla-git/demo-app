@@ -4,6 +4,7 @@ import { Options } from 'ng5-slider';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ProductStore } from 'src/models/product-store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import * as ProductActions from '../../../store/actions/product.actions';
 import * as fromProductStore from '../../../store/reducer/product.reducer';
@@ -30,7 +31,8 @@ export class FilterComponent implements OnInit {
   };
 
   constructor (
-    private store: Store<fromProductStore.ProductState>
+    private store: Store<fromProductStore.ProductState>,
+    private modal: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -51,12 +53,8 @@ export class FilterComponent implements OnInit {
       min: this.sliderForm.value.sliderControl[0],
       max: this.sliderForm.value.sliderControl[1]
     }));
-    this.sliderForm.reset({
-      sliderControl: [
-        this.sliderForm.value.sliderControl[0],
-        this.sliderForm.value.sliderControl[1]
-      ]
-    });
+
+    this.modal.dismissAll();
   }
 
 }
