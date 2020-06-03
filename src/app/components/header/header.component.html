@@ -1,10 +1,10 @@
 <nav class="navbar navbar-light bg-blue">
   <div class="container header-container">
-    <a class="navbar-brand"><fa-icon [icon]="iconJedi"></fa-icon></a>
+    <a routerLink="" class="navbar-brand"><fa-icon [icon]="iconJedi"></fa-icon></a>
 
     <div class="right-content">
       <search></search>
-      <a href="#" class="cart-icon">
+      <a routerLink="cart" class="cart-icon">
         <fa-icon [icon]="faCart"></fa-icon>
         <span *ngIf="itemCount > 0" class="item-count badge badge-success">{{itemCount}}</span>
       </a>

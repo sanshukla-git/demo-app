@@ -24,7 +24,6 @@ export class SearchComponent implements OnInit {
   }
 
   searchProductsByName () {
-    console.log(this.searchForm.value.searchText);
     this.store.dispatch(new ProductActions.SearchProductsByName(this.searchForm.value.searchText));
   }
 

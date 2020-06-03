@@ -77,7 +77,7 @@ export function productReducer(state: ProductStore = initialState, action: Produ
           stock: productInList.stock - 1,
           itemsInCart: productInList.itemsInCart ? productInList.itemsInCart + 1: 1
         };
-        console.log('updatedProduct', updatedProduct);
+
         const filteredProducts = [...newState.filteredProducts];
         filteredProducts[productIndexInFiltered] = {...updatedProduct};
         
@@ -88,7 +88,7 @@ export function productReducer(state: ProductStore = initialState, action: Produ
         // update product cart list
         const cartProducts = [...newState.shoppingList];
         cartProducts[indexOfPayloadInCart] = {...updatedProduct};
-        console.log()
+
         return {
           ...newState,
           filteredProducts,
@@ -104,7 +104,7 @@ export function productReducer(state: ProductStore = initialState, action: Produ
           stock: product.stock - 1,
           itemsInCart: product.itemsInCart ? product.itemsInCart + 1: 1
         };
-        console.log('new product', updatedProduct)
+
         const filteredProducts = [...newState.filteredProducts];
         filteredProducts[productIndexInFiltered] = updatedProduct;
         // updated product object in master array
@@ -117,7 +117,6 @@ export function productReducer(state: ProductStore = initialState, action: Produ
         // add id in itemsInCart array
         newState.itemsInCart = [...newState.itemsInCart, action.payload.id];
 
-        console.log(newState);
         return {
           ...newState,
           filteredProducts,
