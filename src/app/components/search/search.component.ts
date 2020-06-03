@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
     this.filteredList = this.store.select(state => state.productsStore.filteredProducts);
 
     this.storeSubscription = this.filteredList.subscribe(state => {
-      this.searchForm.value.searchText = '';
+      this.searchForm.controls['searchText'].setValue('');
     })
   }
 
