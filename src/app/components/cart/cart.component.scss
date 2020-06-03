@@ -1,0 +1,13 @@
+.cart {
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .summary {
+    @media screen and (max-width: 768px) {
+      padding: 20px 15px;
+      border: 1px solid #bbb;
+    }
+  }
+}
