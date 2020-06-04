@@ -53,7 +53,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   onResize(evt) {
-    if (evt.target.innerWidth > 768) {
+    if (evt.target.innerWidth >= 768) {
       this.modalService.dismissAll();
     }
   }
