@@ -2,12 +2,12 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
-@import './styles/fonts';
+@import './styles/font-roboto.scss';
 
 html, body {
   height: 100%;
 }
 body {
   margin: 0;
-  font-family: 'SourceSansPro', Roboto, "Helvetica Neue", sans-serif;
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
 }
