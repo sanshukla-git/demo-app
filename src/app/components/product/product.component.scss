@@ -30,14 +30,17 @@
 
   .name {
     margin: 5px 0;
+    font-weight: bold;
   }
 
   .price {
     margin-bottom: 10px;
+    display: flex;
 
     p {
       display: inline-block;
       margin-bottom: 0;
+      flex-shrink: 0;
 
       &.discounted {
         color: #888;
