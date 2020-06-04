@@ -8,5 +8,6 @@ export interface ProductStore {
   filterMin: number;
   filterMax: number;
   shoppingList: Product[];
-  itemsInCart: number[]
+  itemsInCart: number[],
+  selectedFilterSort: string
 }

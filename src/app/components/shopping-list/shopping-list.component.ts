@@ -16,7 +16,10 @@ import * as fromProductStore from '../../../store/reducer/product.reducer';
   selector: 'shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    '(window:resize)': 'onResize($event)'
+  }
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   iconFilter = faFilter;
@@ -47,7 +50,12 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
           });
       }
     });
+  }
 
+  onResize(evt) {
+    if (evt.target.innerWidth > 768) {
+      this.modalService.dismissAll();
+    }
   }
 
   ngOnDestroy () {
@@ -61,7 +69,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     };
     this.modalService.open(content, { size: 'sm' });
   }
-  
+
   openSortModal (content) {
     this.modalConfig = {
       title: 'Sort By',

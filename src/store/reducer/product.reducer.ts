@@ -14,7 +14,8 @@ const initialState: ProductStore = {
   filterMin: 0,
   filterMax: 0,
   shoppingList: [],
-  itemsInCart: []
+  itemsInCart: [],
+  selectedFilterSort: ''
 };
 
 export function productReducer(state: ProductStore = initialState, action: ProductActions.ProductListActions): ProductStore {
@@ -80,7 +81,7 @@ export function productReducer(state: ProductStore = initialState, action: Produ
 
         const filteredProducts = [...newState.filteredProducts];
         filteredProducts[productIndexInFiltered] = {...updatedProduct};
-        
+
         // updated product object in master array
         const products = [...newState.products];
         products[productIndexInMaster] = {...updatedProduct};
@@ -180,7 +181,8 @@ export function productReducer(state: ProductStore = initialState, action: Produ
       });
       return {
         ...state,
-        filteredProducts
+        filteredProducts,
+        selectedFilterSort: 'ASC'
       };
     }
     case ProductActions.SORT_PRICE_DESCENDING: {
@@ -202,7 +204,8 @@ export function productReducer(state: ProductStore = initialState, action: Produ
       });
       return {
         ...state,
-        filteredProducts
+        filteredProducts,
+        selectedFilterSort: 'DESC'
       };
     }
     case ProductActions.SORT_BY_DISCOUNT: {
@@ -210,12 +213,13 @@ export function productReducer(state: ProductStore = initialState, action: Produ
       filteredProducts.sort((a, b) => {
         const discProdA = Math.round(a.price.specialPrice > 0 ? ((a.price.price - a.price.specialPrice) / a.price.price * 100): 0);
         const discProdB = Math.round(b.price.specialPrice > 0 ? ((b.price.price - b.price.specialPrice) / b.price.price * 100): 0);
-        
+
         return discProdA < discProdB ? 1: -1;
       });
       return {
         ...state,
-        filteredProducts
+        filteredProducts,
+        selectedFilterSort: 'DISC'
       };
     }
     case ProductActions.SEARCH_PRODUCTS_BY_NAME: {
@@ -224,12 +228,12 @@ export function productReducer(state: ProductStore = initialState, action: Produ
       const filteredProducts = allProducts.filter(product => {
         if (product.price.specialPrice > 0) {
           return (
-            (product.price.specialPrice >= state.filterMin && product.price.specialPrice <= state.filterMax) && 
+            (product.price.specialPrice >= state.filterMin && product.price.specialPrice <= state.filterMax) &&
             product.name.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1
           );
         }
         return (
-          (product.price.price >= state.filterMin && product.price.price <= state.filterMax) && 
+          (product.price.price >= state.filterMin && product.price.price <= state.filterMax) &&
           product.name.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1
         );
       });

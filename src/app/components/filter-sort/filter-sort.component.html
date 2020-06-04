@@ -4,13 +4,22 @@
   </div>
   <ul class="nav">
     <li class="nav-item">
-      <button class="btn btn-link filter-asc btn-sm" (click)="sortProducts('ASC')">Price -- Low High</button>
+      <button
+        class="btn filter-asc btn-sm"
+        [ngClass]="(sortType | async) === 'ASC'? 'btn-primary': 'btn-outline-primary'"
+        (click)="sortProducts('ASC')">Price -- Low High</button>
     </li>
     <li class="nav-item">
-      <button class="btn btn-link filter-desc btn-sm" (click)="sortProducts('DESC')">Price -- High Low</button>
+      <button
+        class="btn filter-desc btn-sm"
+        [ngClass]="(sortType | async) === 'DESC'? 'btn-primary': 'btn-outline-primary'"
+        (click)="sortProducts('DESC')">Price -- High Low</button>
     </li>
     <li class="nav-item">
-      <button class="btn btn-link filter-disc btn-sm" (click)="sortProducts('DISC')">Discount</button>
+      <button
+        class="btn filter-disc btn-sm"
+        [ngClass]="(sortType | async) === 'DISC'? 'btn-primary': 'btn-outline-primary'"
+        (click)="sortProducts('DISC')">Discount</button>
     </li>
   </ul>
 </div>
