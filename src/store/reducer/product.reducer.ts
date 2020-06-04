@@ -182,6 +182,14 @@ export function productReducer(
       }
       break;
     }
+    // reducer case to trigger modal to remove product
+    case ProductActions.REMOVE_PRODUCT_FROM_CART_CLEAR: {
+      return {
+        ...state,
+        productToRemoveFromCart: null
+      }
+      break;
+    }
     // remove selected product on confirmation
     case ProductActions.REMOVE_PRODUCT_FROM_CART: {
       const newState = {...state};

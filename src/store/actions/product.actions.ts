@@ -7,6 +7,7 @@ export const UPDATE_MAX_PRICE = 'UPDATE_MAX_PRICE';
 export const UPDATE_FILTER_SELECTION = 'UPDATE_FILTER_SELECTION';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_PRODUCT_FROM_CART_TRIGGER = 'REMOVE_PRODUCT_FROM_CART_TRIGGER';
+export const REMOVE_PRODUCT_FROM_CART_CLEAR = 'REMOVE_PRODUCT_FROM_CART_CLEAR';
 export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART';
 export const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART';
 export const SORT_PRICE_ASCENDING = 'SORT_PRICE_ASCENDING';
@@ -53,6 +54,10 @@ export class RemoveProductFromCartTrigger implements Action {
   constructor (public payload: Product) {}
 }
 
+export class RemoveProductFromCartClear implements Action {
+  readonly type = REMOVE_PRODUCT_FROM_CART_CLEAR;
+}
+
 export class SortPriceAscending implements Action {
   readonly type = SORT_PRICE_ASCENDING;
 }
@@ -79,6 +84,7 @@ export type ProductListActions =
   | RemoveItemFromCart
   | RemoveProductFromCart
   | RemoveProductFromCartTrigger
+  | RemoveProductFromCartClear
   | SortPriceAscending
   | SortPriceDescending
   | SortByDiscount

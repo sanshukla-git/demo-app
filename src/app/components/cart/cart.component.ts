@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 
 import * as fromProductStore from '../../../store/reducer/product.reducer';
@@ -23,8 +23,11 @@ export class CartComponent implements OnInit {
   totalDiscount: number = 0;
   constructor(
     private store:Store<fromProductStore.ProductState>,
-    private modalService: NgbModal
-  ) { }
+    private modalService: NgbModal,
+    private config: NgbModalConfig
+  ) {
+    config.backdrop = 'static';
+  }
 
   ngOnInit(): void {
     this.product = this.store.select('productsStore');
