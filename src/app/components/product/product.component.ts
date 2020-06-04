@@ -3,9 +3,12 @@ import { Product } from 'src/classes/product';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
+import { faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 import * as ProductActions from '../../../store/actions/product.actions';
 import * as fromProductStore from '../../../store/reducer/product.reducer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'product',
@@ -15,18 +18,26 @@ import * as fromProductStore from '../../../store/reducer/product.reducer';
 })
 export class ProductComponent implements OnInit, OnDestroy {
   @Input() product: Product;
+  @Input() isCart: Boolean = false;
+
+  iconPlus = faPlus;
+  iconMinus = faMinus;
+  iconRemove = faTimes;
 
   productInCart: Boolean = false;
   subscription: Subscription;
 
   cartProducts = this.store.select(state => state.productsStore.itemsInCart);
 
-  constructor (private store: Store<fromProductStore.ProductState>) {}
+  constructor (
+    private store: Store<fromProductStore.ProductState>
+  ) {}
 
   ngOnInit() {
     this.subscription = this.cartProducts.subscribe((itemsInCart:number[]) => {
       this.productInCart = (itemsInCart.indexOf(this.product.id) !== -1);
     });
+
   }
 
   ngOnDestroy () {
@@ -43,6 +54,10 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   removeFromCart(productId: number) {
-    this.store.dispatch(new ProductActions.RemoveProductFromCart(productId));
+    this.store.dispatch(new ProductActions.RemoveItemFromCart(productId));
+  }
+
+  removeProductConfirmation(product: Product) {
+    this.store.dispatch(new ProductActions.RemoveProductFromCartTrigger(product));
   }
 }

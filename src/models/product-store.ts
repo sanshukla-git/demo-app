@@ -9,5 +9,7 @@ export interface ProductStore {
   filterMax: number;
   shoppingList: Product[];
   itemsInCart: number[],
-  selectedFilterSort: string
+  selectedFilterSort: string,
+  // product which is to be removed from cart
+  productToRemoveFromCart: Product
 }

@@ -1,6 +1,5 @@
 import * as ProductActions from '../actions/product.actions';
 import { ProductStore } from 'src/models/product-store';
-import { createSelector } from '@ngrx/store';
 
 export interface ProductState {
   productsStore: ProductStore
@@ -15,10 +14,14 @@ const initialState: ProductStore = {
   filterMax: 0,
   shoppingList: [],
   itemsInCart: [],
-  selectedFilterSort: ''
+  selectedFilterSort: '',
+  productToRemoveFromCart: null
 };
 
-export function productReducer(state: ProductStore = initialState, action: ProductActions.ProductListActions): ProductStore {
+export function productReducer(
+  state: ProductStore = initialState,
+  action: ProductActions.ProductListActions
+): ProductStore {
   switch (action.type) {
     case ProductActions.UPDATE_FETCHED_PRODUCTS:
       return {
@@ -108,6 +111,7 @@ export function productReducer(state: ProductStore = initialState, action: Produ
 
         const filteredProducts = [...newState.filteredProducts];
         filteredProducts[productIndexInFiltered] = updatedProduct;
+
         // updated product object in master array
         const products = [...newState.products];
         products[productIndexInMaster] = updatedProduct;
@@ -125,12 +129,14 @@ export function productReducer(state: ProductStore = initialState, action: Produ
         }
       }
     }
-    case ProductActions.REMOVE_FROM_CART: {
+    case ProductActions.REMOVE_ITEM_FROM_CART: {
       const newState = {...state};
 
       const filteredProductsId = newState.filteredProducts.map(product => product.id);
+      const masterProductsId = newState.products.map(product => product.id);
       const indexOfPayloadInCart = newState.itemsInCart.indexOf(action.payload);
       const productIndexInFiltered = filteredProductsId.indexOf(action.payload);
+      const productIndexInMaster = masterProductsId.indexOf(action.payload);
 
       if (indexOfPayloadInCart !== -1) {
         // update product stock in list
@@ -143,9 +149,14 @@ export function productReducer(state: ProductStore = initialState, action: Produ
         const filteredProducts = [...newState.filteredProducts];
         filteredProducts[productIndexInFiltered] = updatedProduct;
 
+        // updated product object in master array
+        const products = [...newState.products];
+        products[productIndexInMaster] = updatedProduct;
+
         // update product cart list
         const cartProducts = [...newState.shoppingList];
         const itemsInCart = [...newState.itemsInCart];
+
         if (updatedProduct.itemsInCart > 0) {
           cartProducts[indexOfPayloadInCart] = updatedProduct;
         } else {
@@ -161,6 +172,58 @@ export function productReducer(state: ProductStore = initialState, action: Produ
           itemsInCart
         };
       }
+      break;
+    }
+    // reducer case to trigger modal to remove product
+    case ProductActions.REMOVE_PRODUCT_FROM_CART_TRIGGER: {
+      return {
+        ...state,
+        productToRemoveFromCart: action.payload
+      }
+      break;
+    }
+    // remove selected product on confirmation
+    case ProductActions.REMOVE_PRODUCT_FROM_CART: {
+      const newState = {...state};
+
+      const filteredProductsId = newState.filteredProducts.map(product => product.id);
+      const masterProductsId = newState.products.map(product => product.id);
+      const indexOfPayloadInCart = newState.itemsInCart.indexOf(action.payload.id);
+      const productIndexInFiltered = filteredProductsId.indexOf(action.payload.id);
+      const productIndexInMaster = masterProductsId.indexOf(action.payload.id);
+
+      if (indexOfPayloadInCart !== -1) {
+        // update product stock in list
+        const productInList = newState.filteredProducts[productIndexInFiltered];
+        const updatedProduct = {
+          ...productInList,
+          stock: productInList.stock + (productInList.itemsInCart > 0 ? productInList.itemsInCart: 0),
+          itemsInCart: 0
+        };
+        const filteredProducts = [...newState.filteredProducts];
+        filteredProducts[productIndexInFiltered] = updatedProduct;
+
+        // updated product object in master array
+        const products = [...newState.products];
+        products[productIndexInMaster] = updatedProduct;
+
+        // update product cart list
+        const cartProducts = [...newState.shoppingList];
+        const itemsInCart = [...newState.itemsInCart];
+
+        cartProducts.splice(indexOfPayloadInCart, 1);
+        // remove id from itemsInCart array
+        itemsInCart.splice(indexOfPayloadInCart, 1);
+
+        return {
+          ...newState,
+          filteredProducts,
+          shoppingList: cartProducts,
+          itemsInCart,
+          productToRemoveFromCart: null
+        };
+      }
+      break;
     }
     case ProductActions.SORT_PRICE_ASCENDING: {
       const filteredProducts = [...state.filteredProducts];

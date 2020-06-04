@@ -1,4 +1,11 @@
-<div class="product">
+<div class="product" [ngClass]="{'is-cart': isCart}">
+  <button
+    *ngIf="isCart"
+    class="btn btn-danger btn-sm remove-item"
+    (click)="removeProductConfirmation(product)">
+    <fa-icon [icon]="iconRemove"></fa-icon>
+    <span class="sr-only">Remove Product</span>
+  </button>
   <div class="img">
     <img alt="Product" class="product-image" [src]="product.image"/>
   </div>
@@ -28,15 +35,21 @@
           <button
             (click)="removeFromCart(product.id)"
             class="btn btn-success btn-sm"
-            type="button">-</button>
+            type="button">
+            <fa-icon [icon]="iconMinus"></fa-icon>
+          </button>
         </div>
         <label class="form-control text-center">{{product.itemsInCart}}</label>
         <div class="input-group-append" id="button-addon3">
           <button
           class="btn btn-success btn-sm"
           (click)="addToCart(product)"
+          placement="right"
+          [ngbTooltip]="product.stock === 0 ? 'No more units in stock': ''"
           [disabled]="product.stock === 0"
-          type="button">+</button>
+          type="button">
+          <fa-icon [icon]="iconPlus"></fa-icon>
+        </button>
         </div>
       </div>
     </div>

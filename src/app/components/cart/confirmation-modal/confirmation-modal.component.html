@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h4 class="modal-title">Remove Product</h4>
+  <button type="button" class="btn btn-light" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  Are you sure you want to remove "{{product.name}}" containing #{{product.itemsInCart}} item from your cart?
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="removeProduct(product)">Yes</button>
+  <button type="button" class="btn btn-light" (click)="activeModal.dismiss()">No</button>
+</div>

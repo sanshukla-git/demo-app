@@ -1,5 +1,17 @@
 .product {
   margin: 10px 0;
+  position: relative;
+
+  .remove-item {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+
+  &.is-cart {
+    border: 1px solid #aaa;
+    padding: 20px;
+  }
 
   @media only screen and (max-width: 768px) {
     border: 1px solid #aaa;
